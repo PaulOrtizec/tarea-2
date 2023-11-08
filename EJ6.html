@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tareas Interactiva</title>
+    <style>
+        #task-list {
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        .task {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .task-text {
+            flex-grow: 1;
+        }
+
+        .task-delete {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="task-list">
+        <h2>Lista de Tareas</h2>
+        <ul id="tasks">
+        </ul>
+        <input type="text" id="new-task" placeholder="Nueva tarea">
+        <button id="add-task">Agregar Tarea</button>
+    </div>
+
+    <script>
+        const tasksList = document.getElementById('tasks');
+        const newTaskInput = document.getElementById('new-task');
+        const addTaskButton = document.getElementById('add-task');
+
+        addTaskButton.addEventListener('click', () => {
+            const taskText = newTaskInput.value.trim();
+            if (taskText !== '') {
+                const taskItem = document.createElement('li');
+                taskItem.className = 'task';
+                taskItem.innerHTML = `
+                    <span class="task-text">${taskText}</span>
+                    <span class="task-delete">❌</span>
+                `;
+                tasksList.appendChild(taskItem);
+
+                newTaskInput.value = '';
+
+                // Attach a click event listener to the delete button
+                const deleteButton = taskItem.querySelector('.task-delete');
+                deleteButton.addEventListener('click', () => {
+                    tasksList.removeChild(taskItem);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

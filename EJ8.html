@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrusel de Imágenes</title>
+    <style>
+        #carousel-container {
+            width: 400px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #image-carousel {
+            display: flex;
+            transition: transform 1s ease;
+        }
+
+        .carousel-image {
+            width: 400px;
+            height: auto;
+        }
+
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        #prev-button {
+            left: 0;
+        }
+
+        #next-button {
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="carousel-container">
+        <div id="image-carousel">
+            <img class="carousel-image" src="6.jpeg" alt="Imagen 1">
+            <img class="carousel-image" src="7.jpeg" alt="Imagen 2">
+            <img class="carousel-image" src="8.jpeg" alt="Imagen 3">
+            <img class="carousel-image" src="9.jpeg" alt="Imagen 3">
+            <img class="carousel-image" src="10.jpeg" alt="Imagen 3">
+        </div>
+        <div class="carousel-button" id="prev-button">&#9665;</div>
+        <div class="carousel-button" id="next-button">&#9655;</div>
+    </div>
+
+    <script>
+        const prevButton = document.getElementById('prev-button');
+        const nextButton = document.getElementById('next-button');
+        const imageCarousel = document.getElementById('image-carousel');
+        const images = document.querySelectorAll('.carousel-image');
+        let currentIndex = 0;
+
+        prevButton.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            updateCarousel();
+        });
+
+        nextButton.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % images.length;
+            updateCarousel();
+        });
+
+        function updateCarousel() {
+            const offset = -currentIndex * 400;
+            imageCarousel.style.transform = `translateX(${offset}px)`;
+        }
+
+        function autoAdvance() {
+            currentIndex = (currentIndex + 1) % images.length;
+            updateCarousel();
+        }
+
+        setInterval(autoAdvance, 3000); // Cambiar de imagen cada 3 segundos
+    </script>
+</body>
+</html>

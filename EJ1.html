@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambio de Estilo al Clic</title>
+    <style>
+        #elemento {
+            width: 200px;
+            height: 200px;
+            background-color: #3498db;
+            transition: background-color 0.5s;
+        }
+
+        #cambiar-boton {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #2ecc71;
+            border: none;
+            color: #ffffff;
+            cursor: pointer;
+        }
+
+        #cambiar-boton:hover {
+            background-color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <div id="elemento"></div>
+    <button id="cambiar-boton">Cambiar Color de Fondo</button>
+
+    <script>
+        // Obtén el elemento que queremos cambiar de estilo
+        const elemento = document.getElementById("elemento");
+
+        // Agrega un event listener al botón
+        document.getElementById("cambiar-boton").addEventListener("click", function () {
+            // Genera un color de fondo aleatorio
+            const nuevoColor = getRandomColor();
+            
+            // Cambia el color de fondo del elemento
+            elemento.style.backgroundColor = nuevoColor;
+        });
+
+        // Función para generar un color aleatorio en formato hexadecimal
+        function getRandomColor() {
+            const letters = "0123456789ABCDEF";
+            let color = "#";
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+    </script>
+</body>
+</html>
